@@ -36,5 +36,11 @@ Feature: Verify listings and grading submission as a teacher
   Scenario: Mark and view all grades in submissions table 
     Given I am on the "Assign1" "assign activity" page
     And I navigate to "Submissions" in current page administration
-    And I should see "Submitted for grading" in the "User One" "table_row"
+    And I should see "Draft" in the "User One" "table_row"
+    And I click on "Grade" "link" in the ".tertiary-navigation" "css_element"
+    And I grade by filling the marking guide with:
+      | Criteria 1 | 50 | Excellent work! |
+    And I press "Save changes"
+    When I follow "View all submissions"
+    Then "User One" row "Grade" column of "submissions" table should contain "50.00"
 
