@@ -27,21 +27,13 @@ Feature: Adding random questions to a quiz based on category and tags
       | contextlevel    | reference | name        | questioncategory     |
       | Activity module | quiz1     | Subcategory | Questions Category 1 |
     And the following "questions" exist:
-      | questioncategory     | qtype | name                | user     | questiontext    |
-      | Questions Category 1 | essay | question 1 name     | admin    | Question 1 text |
-      | Questions Category 1 | essay | question 2 name     | teacher1 | Question 2 text |
-      | Subcategory          | essay | question 3 name     | teacher1 | Question 3 text |
-      | Subcategory          | essay | question 4 name     | teacher1 | Question 4 text |
-      | Questions Category 1 | essay | "listen" & "answer" | teacher1 | Question 5 text |
-      | Qbank questions      | essay | Qbank question 1    | teacher1 | Qbank question  |
-    And the following "core_question > Tags" exist:
-      | question            | tag      |
-      | question 1 name     | foo      |
-      | question 2 name     | bar      |
-      | question 3 name     | foo      |
-      | question 4 name     | bar      |
-      | "listen" & "answer" | foo      |
-      | Qbank question 1    | qbanktag |
+      | questioncategory     | qtype | name                | user     | questiontext    | tags     |
+      | Questions Category 1 | essay | question 1 name     | admin    | Question 1 text | foo      |
+      | Questions Category 1 | essay | question 2 name     | teacher1 | Question 2 text | bar      |
+      | Subcategory          | essay | question 3 name     | teacher1 | Question 3 text | foo      |
+      | Subcategory          | essay | question 4 name     | teacher1 | Question 4 text | bar      |
+      | Questions Category 1 | essay | "listen" & "answer" | teacher1 | Question 5 text | foo      |
+      | Qbank questions      | essay | Qbank question 1    | teacher1 | Qbank question  | qbanktag |
 
   Scenario: Available tags are shown in the autocomplete tag field
     Given I am on the "Quiz 1" "mod_quiz > Edit" page logged in as "teacher1"
