@@ -70,3 +70,24 @@ Feature: Assignments can have default grades and scales defined
     And I navigate to "Grades > Scales" in site administration
     And "Default competence scale" row "Used" column of "generaltable" table should contain "No"
     And "Separate and Connected ways of knowing" row "Used" column of "generaltable" table should contain "Yes"
+
+  Scenario Outline: Assignment defaults for marking can be locked
+    Given the following config values are set as admin:
+      | config                   | value   | plugin |
+      | blindmarking             | <state> | assign |
+      | blindmarking_adv         | 1       | assign |
+      | markingworkflow          | 1       | assign |
+      | markingworkflow_locked   | <state> | assign |
+      | markingallocation        | 1       | assign |
+      | markingallocation_locked | <state> | assign |
+    When I am on the "Course 1" course page logged in as teacher1
+    And I add an assign activity to course "Course 1" section "1"
+    And I expand all fieldsets
+    Then the field "blindmarking" matches value "<value>"
+    And "Locked" "icon" <shouldornotexist> in the "Use marking workflow" "form_row"
+    And "Locked" "icon" <shouldornotexist> in the "Use marking allocation" "form_row"
+
+    Examples:
+      | state | shouldornotexist | value |
+      | 0     | should not exist | No    |
+      | 1     | should exist     | Yes   |
